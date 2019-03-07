@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arroy function</title>
+</head>
+
+<body>
+    <button>Click Me</button>
+
+    <script>
+        const button = document.querySelector('button');
+
+        const handleClick = function addEvent(event) {
+            console.log(event);
+
+        };
+
+        // 예전 코드
+        // button.addEventListener("click", handleClick);
+        // button.addEventListener("click", function(event){
+        //     console.log(event);
+
+        // })
+        const sayHello3 = (name = "Hmuan") => 'Hellow' + name;
+        function sayHello4(name = "human") {
+            return "Hello " + name;
+        }
+
+        const hoin = sayHello4();
+        console.log(hoin);
+
+
+        const sayHello2 = (name = "Hmuan") => `Hellow ${name}`;
+        button.addEventListener("click", (event, something) => console.log(event));
+
+
+        // function sayHello(name){
+        //     return "Hello "+name 
+        //     // 리턴값이 있었기때문엔
+        // }
+
+        const sayHello = (name) => "Hello" + name;
+        // arrow function은 기본적으로 리턴이 함축 되있음
+
+        const nicolas = sayHello("hoin");
+        console.log(nicolas);
+
+        console.log(sayHello2);
+        console.log(sayHello4);
+
+
+
+        //  Object Destructuring 
+        const human = {
+            name: 'jin',
+            lastName: 'hoin',
+            nationality: 'korean',
+            favFood: {
+                breakfast: "Sang",
+                lunch: "Dong",
+                dinner: 'kim'
+            }
+        }
+
+        // const name = human.name;
+        // const lastName = human.lastName;
+        const { name, lastName, nationality: difName, favFood: { dinner, breakfast, lunch } } = human;
+        // 속성을 다른이름으로 대체했다
+        // const dinner = human.favFood.dinner;
+        // 기존 코드
+        // console.log('기존의 사용 방식들',name, lastName);
+        console.log('object Destucturing', name, lastName, difName, dinner, breakfast, lunch);
+
+        //  
+        const days = ['Mon', 'Thies', 'Wed'];
+        const otherDays = ["Thu , Fri", "Sat"];
+        // const allDays = days + otherDays;
+
+        // let allDays = [days + otherDays];
+        // 배열을 전체의 내용을 한개로 만들어준다
+
+        //  const allDays = [days, otherDays];
+        //  두개의 배열이지 실제의 내용은 안나온다
+
+        // 진정한 배열을 하나로 가지게 하는법
+        const allDays = [...days, ...otherDays];
+
+        console.log('spread operator', allDays);
+
+        const ob = {
+            first: "hi",
+            second: "hello"
+        }
+        const ab = {
+            thrid: "good night",
+            four: "say hello"
+        }
+
+        const timeGreet = { ...ob, ...ab };
+
+        console.log("object spread operator", timeGreet);
+
+        // classes
+        console.log('clases');
+
+        class Human {
+            constructor(name, lastName) {
+                this.name = name;
+                this.lastName = lastName;
+                // this 은 이 클래스를 참고한다는거임
+            }
+        }
+        const nico = new Human("hoin", "jin");
+        class BaBy extends Human {
+            cry() {
+                console.log('Waaaaa');
+            }
+            sayName() {
+                console.log(`my name is ${this.name}`);
+
+            }
+        }
+
+        const myBaby = new BaBy("yojin", 'jo');
+
+
+        console.log("새로운 생성자로 객체 뽑기", nico);
+        console.log('상속에 따른 클래스', myBaby);
+        console.log('하지만 메소드도 사용할수 잇다', myBaby.cry());
+        console.log('매소드를 호출하고 이것은 언디파인 상속받음 파라메타도 사용가능', myBaby.sayName());
+
+
+
+        // 1.6 Array Map 
+        const dayz = ["Mon", "Thu", "Wed", "Thurs", "Fri"];
+
+        const smilingDays = dayz.map(potato => console.log('array map 호출', potato));
+
+
+        // 두번째 인자로 인덱스를 받을수 잇다
+        const smilingDays2 = dayz.map((potato, index) => `#${1 + index} smile ${potato}`);
+        //   arrow function return 을 함축하고 potato는 배열안에 인자를 다 리턴함
+
+
+        const addSmile = day => `smile ${days}`;
+        const smilingDays3 = dayz.map(addSmile);
+
+        // potato가 배열안에 인자로 틈틈히 들어간다
+        // 리턴한값으로 이루어진 배열을 리턴한다
+
+        // console.log('arrayMap', smilingDays);
+        console.log('array map을 활요한것', smilingDays2);
+        console.log('array may에 함수를 더한것', smilingDays3);
+
+        //  array fillter 
+
+        const testCondition = (number) => number < 15;
+        const checkCondintion = (postz) => postz !== "Bye"; 
+        const numbers = [2, 43, 12, 32, 14, 11, 15, 16, 34, 56, 43, 21, 12]
+        const posts = ["Hi", "Hello", "Bye"];
+
+        // const numberThan15 = numbers.filter(number => number > 15);
+        // const cleanPosts = posts.filter(post => post !== "Bye");
+        const numberThan15 = numbers.filter(testCondition);
+        const cleanPosts = posts.filter(checkCondintion);
+
+        // by가 아닌것 리턴해라
+        console.log('numbers', numbers);
+
+        console.log('numberThan15', numberThan15);
+        console.log('cleanPosts', cleanPosts);
+
+        // finally; foreach
+
+        let postM = ['hi', 'Hello', 'Bye'];
+        let greetings = ['hi', 'Howdy', 'Suup'];
+        const foreachPrint = (post) => console.log('forEach print', post);
+        
+        // postM.forEach(post => console.log('forEach console log',post));
+        postM.forEach(foreachPrint);
+
+        // 문자 배열안에 스트링 값을 확인해서 유무를 알수잇다
+        if (!greetings.includes("Helo")) {
+            greetings.push('Hello')
+        }
+
+        console.log('includes' , greetings);
+        
+
+
+
+    </script>
+</body>
+
+</html>
